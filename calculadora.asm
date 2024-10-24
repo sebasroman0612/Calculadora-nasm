@@ -124,3 +124,34 @@
     int 21h
 
     jmp menu
+
+;RESTA
+    Op_Resta:
+    lea dx,msg_PrimerNumero
+    mov ah,9
+    int 21h
+
+    mov ah,1
+    int 21h
+    mov bl,al
+
+    lea dx,msg_SegundoNumero
+    mov ah,9
+    int 21h
+
+    mov ah,1
+    int 21h
+    mov cl,al
+
+    sub bl,cl
+    add bl,48
+
+    lea dx,msg_Resultado
+    mov ah,9
+    int 21h
+
+    mov ah,2
+    mov dl,bl
+    int 21h
+
+    jmp menu
