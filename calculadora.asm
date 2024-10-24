@@ -25,3 +25,62 @@
 
 
 
+;APERTURA DEL PROGRAMA
+    .code
+    mov ax,@data
+    mov ds,ax
+
+
+
+
+;---MOSTRAR MENU---
+    menu:
+        lea dx,msg_Menu
+        mov ah,9
+        int 21h
+
+        lea dx,msg_Suma
+        mov ah,9
+        int 21h
+
+        lea dx,msg_Resta 
+        mov ah,9
+        int 21h
+
+        lea dx,msg_Op_Multiplicacion
+        mov ah,9
+        int 21h
+
+        lea dx,msg_Op_Division 
+        mov ah,9
+        int 21h
+
+        lea dx,msg_Salir 
+        mov ah,9
+        int 21h
+
+        lea dx,msg_Opcion 
+        mov ah,9
+        int 21h
+
+        mov ah,1
+        int 21h
+        mov bh,al
+        sub bh,48
+
+
+;---SWITCH OPCIONES---
+    cmp bh,1
+    je Op_Suma
+
+    cmp bh,2
+    je Op_Resta
+
+    cmp bh,3
+    je Op_Multiplicacion
+
+    cmp bh,4
+    je Op_Division
+
+    cmp bh,5
+    je exit_p
