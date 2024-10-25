@@ -200,4 +200,51 @@
     jmp menu
 
 
+;Division
+    Op_Division:
+    lea dx,msg_PrimerNumero 
+    mov ah,9
+    int 21h
+
+    mov ah,1
+    int 21h
+    sub al,48
+    mov num1,al
+
+    lea dx,msg_SegundoNumero 
+    mov ah,9
+    int 21h
+
+    mov ah,1
+    int 21h
+    sub al,48
+    mov num2,al
+
+    mov cl,num1
+    mov ax,cx
+
+    div num2
+    mov resultado,al
+    mov ah,00
+    aad
+
+    add ah,48
+    add al,48
+
+    mov bx,ax
+
+    lea dx,msg_Resultado 
+    mov ah,9
+    int 21h
+
+    mov ah,2
+    mov dl,bh
+    int 21h
+
+    mov ah,2
+    mov dl,bl
+    int 21h
+
+    jmp menu
+
 
