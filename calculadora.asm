@@ -202,7 +202,7 @@
 
 ;Division
     Op_Division:
-    lea dx,msg_PrimerNumero 
+    lea dx,msg_PrimerNumero
     mov ah,9
     int 21h
 
@@ -211,7 +211,7 @@
     sub al,48
     mov num1,al
 
-    lea dx,msg_SegundoNumero 
+    lea dx,msg_SegundoNumero
     mov ah,9
     int 21h
 
@@ -233,7 +233,7 @@
 
     mov bx,ax
 
-    lea dx,msg_Resultado 
+    lea dx,msg_Resultado
     mov ah,9
     int 21h
 
@@ -246,5 +246,17 @@
     int 21h
 
     jmp menu
+
+;---CIERRE DEL PROGRAMA---
+    exit_p:
+    lea dx,msg_CerrarPrograma
+    mov ah,9
+    int 21h
+
+    exit:
+    mov ah, 4ch
+    int 21h
+
+    end
 
 
