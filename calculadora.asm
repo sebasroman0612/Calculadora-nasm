@@ -27,7 +27,7 @@
 
 ;APERTURA DEL PROGRAMA
     .code
-    mov ax,@data
+    mov ax,@data ;Inicializa el segmento de datos
     mov ds,ax
 
 
@@ -35,11 +35,11 @@
 
 ;---MOSTRAR MENU---
     menu:
-        lea dx,msg_Menu
+        lea dx,msg_Menu  ;Muestra el menu de opciones
         mov ah,9
         int 21h
 
-        lea dx,msg_Suma
+        lea dx,msg_Suma ;Opciones de operaciones
         mov ah,9
         int 21h
 
@@ -63,7 +63,7 @@
         mov ah,9
         int 21h
 
-        mov ah,1
+        mov ah,1 ;Lee la opcion seleccionada
         int 21h
         mov bh,al
         sub bh,48
@@ -86,7 +86,7 @@
     je exit_p
 
 ;SUMA
-    Op_Suma:
+    Op_Suma:                ;Solicita y lee los numeros
     lea dx, msg_PrimerNumero
     mov ah,9
     int 21h
@@ -103,7 +103,7 @@
     int 21h
     mov cl,al
 
-    add al,bl
+    add al,bl ;Realiza la suma
     mov ah,0
     aaa
 
@@ -111,7 +111,7 @@
     add bh,48
     add bl,48
 
-    lea dx,msg_Resultado
+    lea dx,msg_Resultado ;Imprime el resultado
     mov ah,9
     int 21h
 
@@ -123,7 +123,7 @@
     mov dl,bl
     int 21h
 
-    jmp menu
+    jmp menu        ;Regresa al menu principal
 
 ;RESTA
     Op_Resta:
@@ -248,7 +248,7 @@
     jmp menu
 
 ;---CIERRE DEL PROGRAMA---
-    exit_p:
+    exit_p:         ;Etiqueta de cierre del programa
     lea dx,msg_CerrarPrograma
     mov ah,9
     int 21h
@@ -257,6 +257,6 @@
     mov ah, 4ch
     int 21h
 
-    end
+    end  ;Fin del codigo fuente
 
 
