@@ -200,52 +200,68 @@
     jmp menu
 
 
-;Division
+; División
     Op_Division:
-    lea dx,msg_PrimerNumero
-    mov ah,9
-    int 21h
+        lea dx, msg_PrimerNumero
+        mov ah, 9
+        int 21h
 
-    mov ah,1
-    int 21h
-    sub al,48
-    mov num1,al
+        mov ah, 1
+        int 21h
+        sub al, 48
+        mov num1, al
 
-    lea dx,msg_SegundoNumero
-    mov ah,9
-    int 21h
+        lea dx, msg_SegundoNumero
+        mov ah, 9
+        int 21h
 
-    mov ah,1
-    int 21h
-    sub al,48
-    mov num2,al
+        mov ah, 1
+        int 21h
+        sub al, 48
+        mov num2, al
 
-    mov cl,num1
-    mov ax,cx
+        ; Verificación de división por cero
+        cmp num2, 0
+        je DivZeroError ; Salta a DivZeroError si num2 es cero
 
-    div num2
-    mov resultado,al
-    mov ah,00
-    aad
+        ; Cargar el valor de num1 en AX para la división
+        mov al, num1
+        cbw              ; Extiende AL a AX (convierte byte a word)
 
-    add ah,48
-    add al,48
+        ; Realizar la división
+        mov cl, num2
+        div cl
+        mov resultado, al
+        aam
 
-    mov bx,ax
+        add ah, 48
+        add al, 48
 
-    lea dx,msg_Resultado
-    mov ah,9
-    int 21h
+        mov bx, ax
 
-    mov ah,2
-    mov dl,bh
-    int 21h
+        lea dx, msg_Resultado
+        mov ah, 9
+        int 21h
 
-    mov ah,2
-    mov dl,bl
-    int 21h
+        mov ah, 2
+        mov dl, bh
+        int 21h
 
-    jmp menu
+        mov ah, 2
+        mov dl, bl
+        int 21h
+
+        jmp menu ; Regresa al menú
+
+    ; Manejo de error de división por cero
+    DivZeroError:
+        lea dx, msg_ErrorDivZero ; Cargar la dirección del mensaje de error
+        mov ah, 9
+        int 21h
+        jmp menu ; Regresa al menú principal
+
+;--- MENSAJE DE ERROR ---
+msg_ErrorDivZero db 10, 13, 'Operacion no valida. Division por cero no permitida.$'
 
 ;---CIERRE DEL PROGRAMA---
     exit_p:         ;Etiqueta de cierre del programa
